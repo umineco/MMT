@@ -1,2 +1,2 @@
-# MMT_wiki
-数理音楽理論wiki
+# MMT
+数理音楽理論
