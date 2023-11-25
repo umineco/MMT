@@ -12,7 +12,7 @@ import matplotlib.ticker as ticker
 def all_partitions(c, d):
   return [[a - b for a, b in zip(partition + (c,), (0,) + partition)] for partition in combinations(range(1, c), d - 1)]
 
-# all_partitions(c, d)の要素のうち，重複分を削除したリストを取得
+# all_partitions(c, d)の要素のうち，移置で重ね合わせられる重複分を削除したリストを取得
 # Ex.) partitions(7, 3) = [[1, 1, 5], [1, 2, 4], [1, 3, 3], [1, 4, 2], [2, 2, 3]]
 def partitions(c, d):
   if gcd(c, d) == 1:
@@ -55,7 +55,7 @@ def selected_points(c, d):
 def first_Fcomps(c, pcsets):
   return [abs(sum(e ** (-2 * pi * k * 1j / c) for k in pcset)) for pcset in pcsets]
 
-# グラフを描画（x軸：PCセット，y軸：第1Fourier成分）
+# グラフを描画（x軸：第1Fourier成分，y軸：PCセット）
 def draw_graph_first_Fcomps(c, d):
   q_sort = input('絶対値の大きい順にソートして表示しますか？（y/n）')
   if q_sort == 'y':
@@ -63,7 +63,7 @@ def draw_graph_first_Fcomps(c, d):
     len_axis_y = len(pcsets)
     range_y = range(len_axis_y)
     Fcomps = first_Fcomps(c, pcsets)
-    Fcomps_sorted =sorted(zip(Fcomps, pcsets, partitions_c_d))
+    Fcomps_sorted = sorted(zip(Fcomps, pcsets, partitions_c_d))
     axis_x, axis_y, subaxis_y = zip(*Fcomps_sorted)
     max_axis_x = axis_x[-1]
   elif q_sort == 'n':
@@ -104,7 +104,7 @@ def draw_graph_first_Fcomps(c, d):
       
   plt.show()
 
-# この値を指定（0 < c < d）
+# この値を指定（0 < d < c）
 c = int(input('c = '))
 d = int(input('d = '))
 
